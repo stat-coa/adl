@@ -8,28 +8,27 @@ BASE_DIR = environ.Path(__file__) - 2
 env = environ.Env()
 
 # Read a optional env file if not configure from environment variables
-if os.path.exists(BASE_DIR('.env')):
-    environ.Env.read_env(BASE_DIR('.env'))
+if os.path.exists(BASE_DIR(".env")):
+    environ.Env.read_env(BASE_DIR(".env"))
 
-SECRET_KEY = env.str('SECRET_KEY')
+SECRET_KEY = env.str("SECRET_KEY")
 
-DEBUG = env.bool('DEBUG')
+DEBUG = env.bool("DEBUG")
 
 # ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.humanize',
-    'django.contrib.sites',
-
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django.contrib.humanize",
+    "django.contrib.sites",
     # Third-part packages
     # 'rest_framework',
     # 'crispy_forms',
@@ -42,9 +41,8 @@ INSTALLED_APPS = [
     # 'ckeditor',
     # 'tagulous',
     # 'django_db_logger',
-
     # Local apps
-    'dashboard',
+    "dashboard",
     # 'apps.accounts',
     # 'apps.configs',
     # 'apps.crops',
@@ -67,132 +65,126 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    "django.middleware.security.SecurityMiddleware",
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.cache.UpdateCacheMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
     # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.gzip.GZipMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.gzip.GZipMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # 'tracking.middleware.VisitorTrackingMiddleware',
-    'csp.middleware.CSPMiddleware',
+    "csp.middleware.CSPMiddleware",
     "django_permissions_policy.PermissionsPolicyMiddleware",
-
 ]
 
-ROOT_URLCONF = 'dashboard.urls'
+ROOT_URLCONF = "dashboard.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(BASE_DIR('templates'))],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.template.context_processors.i18n',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [str(BASE_DIR("templates"))],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.i18n",
+                "django.contrib.messages.context_processors.messages",
                 # custom contexts
-                'dashboard.context_processors.ga_tracking_id',
-                'dashboard.context_processors.use_ga',
+                "dashboard.context_processors.ga_tracking_id",
+                "dashboard.context_processors.use_ga",
                 # 'dashboard.context_processors.aprp_version',
-                'dashboard.context_processors.web_name',
-                'dashboard.context_processors.tableau_update_year',
-                'dashboard.context_processors.tableau_update_month',                
-                'csp.context_processors.nonce',
+                "dashboard.context_processors.web_name",
+                "dashboard.context_processors.tableau_update_year",
+                "dashboard.context_processors.tableau_update_month",
+                "csp.context_processors.nonce",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'dashboard.wsgi.application'
+WSGI_APPLICATION = "dashboard.wsgi.application"
 
 
 # Logging
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
         },
-        'simple': {
-            'format': '%(levelname)s %(asctime)s %(message)s'
+        "simple": {"format": "%(levelname)s %(asctime)s %(message)s"},
+    },
+    "handlers": {
+        # 'db_log': {
+        #     'level': 'DEBUG',
+        #     'class': 'django_db_logger.db_log_handler.DatabaseLogHandler'
+        # },
+        "atsvp_log": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": "atsvp.log",
+            "formatter": "verbose",
         },
     },
-    'handlers': {
-       # 'db_log': {
-       #     'level': 'DEBUG',
-       #     'class': 'django_db_logger.db_log_handler.DatabaseLogHandler'
-       # },
-        'atsvp_log': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'atsvp.log',
-            'formatter': 'verbose'
+    "loggers": {
+        # 'db': {
+        #     'handlers': ['db_log'],
+        #     'level': 'DEBUG'
+        # },
+        "django": {
+            "handlers": ["atsvp_log"],
+            "propagate": True,
+            "level": "DEBUG",
         },
+        "atsvp": {"handlers": ["atsvp_log"], "level": "DEBUG"},
     },
-    'loggers': {
-       # 'db': {
-       #     'handlers': ['db_log'],
-       #     'level': 'DEBUG'
-       # },
-        'django': {
-            'handlers':['atsvp_log'],
-            'propagate': True,
-            'level':'DEBUG',
-        },
-        'atsvp': {
-            'handlers': ['atsvp_log'],
-            'level': 'DEBUG'
-        }
-    }
 }
 # LOGGING = {
-    # 'version': 1,
-    # 'disable_existing_loggers': False,
-    # 'formatters': {
-        # 'verbose': {
-            # 'format' :"[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            # 'datefmt' :"%d/%b/%Y %H:%M:%S"
-        # },
-        # 'simple': {
-            # 'format': '%(levelname)s %(message)s'
-        # },
-    # },
-    # 'handlers': {
-        # 'file': {
-            # 'level': 'DEBUG',
-            # 'class': 'logging.FileHandler',
-            # 'filename': 'coa.log',
-            # 'formatter': 'verbose'
-        # },
-    # },
-    # 'loggers': {
-        # 'django': {
-            # 'handlers':['file'],
-            # 'propagate': True,
-            # 'level':'DEBUG',
-        # },
-        # 'MYAPP': {
-            # 'handlers': ['file'],
-            # 'level': 'DEBUG',
-        # },
-    # }
+# 'version': 1,
+# 'disable_existing_loggers': False,
+# 'formatters': {
+# 'verbose': {
+# 'format' :"[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+# 'datefmt' :"%d/%b/%Y %H:%M:%S"
+# },
+# 'simple': {
+# 'format': '%(levelname)s %(message)s'
+# },
+# },
+# 'handlers': {
+# 'file': {
+# 'level': 'DEBUG',
+# 'class': 'logging.FileHandler',
+# 'filename': 'coa.log',
+# 'formatter': 'verbose'
+# },
+# },
+# 'loggers': {
+# 'django': {
+# 'handlers':['file'],
+# 'propagate': True,
+# 'level':'DEBUG',
+# },
+# 'MYAPP': {
+# 'handlers': ['file'],
+# 'level': 'DEBUG',
+# },
+# }
 # }
 
 # Database
 
 DATABASES = {
-    'default': {
+    "default": {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
@@ -229,13 +221,13 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hant'
+LANGUAGE_CODE = "zh-hant"
 
 # Local time zone for this installation. All choices can be found here:
 # https://en.wikipedia.org/wiki/List_of_tz_zones_by_name (although not all
 # systems may support all possibilities). When USE_TZ is True, this is
 # interpreted as the default user time zone.
-TIME_ZONE = 'Asia/Taipei'
+TIME_ZONE = "Asia/Taipei"
 
 # If you set this to True, Django will use timezone-aware datetimes
 # .
@@ -243,7 +235,7 @@ USE_TZ = True
 
 # Languages we provide translations for, out of the box.
 LANGUAGES = [
-    ('zh-hant', _('Traditional Chinese')),
+    ("zh-hant", _("Traditional Chinese")),
     # ('en', _('English')),
 ]
 
@@ -256,10 +248,10 @@ LANGUAGES = [
 
 
 # Settings for language cookie
-LANGUAGE_COOKIE_NAME = 'django_language'
+LANGUAGE_COOKIE_NAME = "django_language"
 LANGUAGE_COOKIE_AGE = None
 LANGUAGE_COOKIE_DOMAIN = None
-LANGUAGE_COOKIE_PATH = '/'
+LANGUAGE_COOKIE_PATH = "/"
 
 
 # If you set this to True, Django will format dates, numbers and calendars
@@ -268,15 +260,13 @@ USE_L10N = False
 
 
 # Static files (CSS, JavaScript, Images)
-STATICFILES_DIRS = [
-    str(BASE_DIR('static'))
-]
-STATIC_URL = '/static/'
+STATICFILES_DIRS = [str(BASE_DIR("static"))]
+STATIC_URL = "/static/"
 
 # WhiteNoise
 STATIC_ROOT = str(BASE_DIR("live-static-files", "static-root"))
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = str(BASE_DIR("live-static-files", "media-root"))
 
@@ -284,11 +274,9 @@ SERVE_MEDIA_FILES = False  # make whitenoise serving media files
 
 # All-auth
 
-AUTHENTICATION_BACKENDS = (
-    "django.contrib.auth.backends.ModelBackend",
-)
+AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/"
 # LOGIN_URL = '/accounts/login/'
 
 # Crispy
@@ -364,81 +352,105 @@ LOGIN_REDIRECT_URL = '/'
 SESSION_COOKIE_AGE = 60 * 60 * 2
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_NAME = '__Secure-sessionid'
+SESSION_COOKIE_NAME = "__Secure-sessionid"
 
 # Django Security Headers Settings
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_NAME = '__Secure-csrftoken'
-SECURE_HSTS_SECONDS = 31536000   # Strict-Transport-Security
+CSRF_COOKIE_NAME = "__Secure-csrftoken"
+SECURE_HSTS_SECONDS = 31536000  # Strict-Transport-Security
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_REFERRER_POLICY = 'same-origin'  # Referrer-Policy
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_REFERRER_POLICY = "same-origin"  # Referrer-Policy
 SECURE_CONTENT_TYPE_NOSNIFF = True  # X-Content-Type-Options
-SECURE_BROWSER_XSS_FILTER = True    # X-XSS-Protection
-CSP_DEFAULT_SRC = ("'self'", "'unsafe-inline'")   # Content-Security-Policy
-CSP_CONNECT_SRC = ("'self'", "'unsafe-inline'", 'www.google-analytics.com')
-CSP_FRAME_SRC = ("'self'", "'unsafe-inline'", 'bigdata.moa.gov.tw', 'public.tableau.com')
-CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", 'fonts.googleapis.com', 'cdn.datatables.net', 'cdnjs.cloudflare.com', 'bigdata.moa.gov.tw', 'www.google-analytics.com', 'public.tableau.com')
-CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", 'ajax.googleapis.com', 'cdnjs.cloudflare.com', 'bigdata.moa.gov.tw', 'www.google-analytics.com', 'public.tableau.com')
+SECURE_BROWSER_XSS_FILTER = True  # X-XSS-Protection
+CSP_DEFAULT_SRC = ("'self'", "'unsafe-inline'")  # Content-Security-Policy
+CSP_CONNECT_SRC = ("'self'", "'unsafe-inline'", "www.google-analytics.com")
+CSP_FRAME_SRC = (
+    "'self'",
+    "'unsafe-inline'",
+    "bigdata.moa.gov.tw",
+    "public.tableau.com",
+)
+CSP_STYLE_SRC = (
+    "'self'",
+    "'unsafe-inline'",
+    "fonts.googleapis.com",
+    "cdn.datatables.net",
+    "cdnjs.cloudflare.com",
+    "bigdata.moa.gov.tw",
+    "www.google-analytics.com",
+    "public.tableau.com",
+)
+CSP_SCRIPT_SRC = (
+    "'self'",
+    "'unsafe-inline'",
+    "ajax.googleapis.com",
+    "cdnjs.cloudflare.com",
+    "bigdata.moa.gov.tw",
+    "www.google-analytics.com",
+    "public.tableau.com",
+)
 # CSP_SCRIPT_SRC_ELEM = ("'self'",'unsafe-inline','bigdata.moa.gov.tw')
 # CSP_INCLUDE_NONCE_IN=['script-src','style-src']   #使用此規則會覆蓋 'unsafe-inline'
 # CSP_NONCE_SCRIPT = True  # True if you want to use it
 # CSP_NONCE_STYLE = True  # True if you want to use it
 # CSP_FLAG_STRICT = True  # True to include strict-dynamic in CSP
-CSP_FONT_SRC = ("'self'", 'fonts.gstatic.com','fonts.googleapis.com')
-CSP_IMG_SRC = ("'self'", 'www.google-analytics.com', 'public.tableau.com')
+CSP_FONT_SRC = ("'self'", "fonts.gstatic.com", "fonts.googleapis.com")
+CSP_IMG_SRC = ("'self'", "www.google-analytics.com", "public.tableau.com")
 
 # PERMISSIONS_POLICY
 PERMISSIONS_POLICY = {
-    #範例 全部拒絕:[]; 特定網站:["self", "https://archive.org"]; 全部同意:"*"
-    "accelerometer": [],    #加速度
+    # 範例 全部拒絕:[]; 特定網站:["self", "https://archive.org"]; 全部同意:"*"
+    "accelerometer": [],  # 加速度
     # "ambient-light-sensor": [], #環境光感應
-    "autoplay": [], #自動撥放
-    "camera": [],   #攝影機
+    "autoplay": [],  # 自動撥放
+    "camera": [],  # 攝影機
     # "display-capture": [], #顯示剪貼簿
-    "document-domain": [],  #文件網域
-    "encrypted-media": [],  #加密多媒體
-    "fullscreen": [],   #全螢幕
-    "geolocation": [],  #地理定位
-    "gyroscope": [],    #陀螺儀
+    "document-domain": [],  # 文件網域
+    "encrypted-media": [],  # 加密多媒體
+    "fullscreen": [],  # 全螢幕
+    "geolocation": [],  # 地理定位
+    "gyroscope": [],  # 陀螺儀
     # "interest-cohort": [],  #興趣對列
-    "magnetometer": [], #磁力計
-    "microphone": [],   #麥克風
-    "midi": [], #midi音效檔案
-    "payment": [],  #支付功能
-    "usb": [],  #usb
+    "magnetometer": [],  # 磁力計
+    "microphone": [],  # 麥克風
+    "midi": [],  # midi音效檔案
+    "payment": [],  # 支付功能
+    "usb": [],  # usb
 }
 
 # Google Analytics
-USE_GA = env.bool('USE_GA', default=False)
-GA_TRACKING_ID = env.str('GA_TRACKING_ID', default='')
+USE_GA = env.bool("USE_GA", default=False)
+GA_TRACKING_ID = env.str("GA_TRACKING_ID", default="")
 
 # Email Backend
-EMAIL_BACKEND = env.str('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
-EMAIL_HOST = env.str('EMAIL_HOST', default='smtp.gmail.com')
-EMAIL_PORT = env.int('EMAIL_PORT', default=587)
-EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
+EMAIL_BACKEND = env.str(
+    "EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend"
+)
+EMAIL_HOST = env.str("EMAIL_HOST", default="smtp.gmail.com")
+EMAIL_PORT = env.int("EMAIL_PORT", default=587)
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
 
-EMAIL_HOST_USER = env.str('EMAIL_HOST_USER', default='')
-EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD', default='')
-DEFAULT_FROM_EMAIL = env.str('DEFAULT_FROM_EMAIL', default='')
-ADMINS = [(user, user) for user in env.list('ADMINS', default=[])]
+EMAIL_HOST_USER = env.str("EMAIL_HOST_USER", default="")
+EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD", default="")
+DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL", default="")
+ADMINS = [(user, user) for user in env.list("ADMINS", default=[])]
 
 # Password limits
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        'OPTIONS': {
-            'min_length': 8,
-        }
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {
+            "min_length": 8,
+        },
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
 ]
 
@@ -487,8 +499,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # USE_X_FORWARDED_PORT = True
 
 # TableauServer Update Date
-TABLEAU_UPDATE_YEAR = env.str('ATSVP_UPDATE_YEAR', default='')
-TABLEAU_UPDATE_MONTH = env.str('ATSVP_UPDATE_MONTH', default='')
+TABLEAU_UPDATE_YEAR = env.str("ATSVP_UPDATE_YEAR", default="")
+TABLEAU_UPDATE_MONTH = env.str("ATSVP_UPDATE_MONTH", default="")
 
 # Web Name
-WEB_NAME = env.str('ATSVP_WEBNAME', default='')
+WEB_NAME = env.str("ATSVP_WEBNAME", default="農業災害損失統計平台")

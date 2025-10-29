@@ -26,7 +26,7 @@
                 <a href="{% url 'about' %}" title="關於"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">主頁</span></a>
             </li>
 		<li>
-                <a color-alert href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-yellow"></i>
+                {% comment %} <a color-alert href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-yellow"></i>
                     <span class="menu-item-parent">總體</span>
                 </a>
                 <ul>
@@ -37,34 +37,40 @@
 						<a color-alert href="/tableau2"><span class="menu-item-parent">進出口總覽</span></a>
 					</li>
 				</ul>
-            </li>
+            </li> {% endcomment %}
             <li>
                 <a color-alert href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i>
-                    <span class="menu-item-parent">國家(地區)別</span>
+                    <span class="menu-item-parent">災害損失</span>
                 </a>
 				<ul>
 					<li>
-						<a color-alert href="/tableau3"><span class="menu-item-parent">產品別</span></a>
+						<a color-alert href="/tableau3"><span class="menu-item-parent">農業災害產物及民間設施損失</span></a>
 					</li>
 					<li>
-						<a color-alert href="/tableau4"><span class="menu-item-parent">製品別</span></a>
+						<a color-alert href="/tableau4"><span class="menu-item-parent">農業災害公共設施損失 </span></a>
+					</li>
+                    <li>
+						<a color-alert href="/tableau5"><span class="menu-item-parent">農業災害產物損失</span></a>
+					</li>
+					<li>
+						<a color-alert href="/tableau6"><span class="menu-item-parent">111年災害分布情形</span></a>
 					</li>
 				</ul>
             </li>
-            <li>
+            {% comment %} <li>
                 <a color-alert href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-green"></i>
                     <span class="menu-item-parent">農產品別</span>
                 </a>
 				<ul>
 					<li>
-						<a color-alert href="/tableau5"><span class="menu-item-parent">產品別</span></a>
+						<a color-alert href="/tableau5"><span class="menu-item-parent">農業災害產物損失</span></a>
 					</li>
 					<li>
-						<a color-alert href="/tableau6"><span class="menu-item-parent">製品別</span></a>
+						<a color-alert href="/tableau6"><span class="menu-item-parent">111年災害分布情形</span></a>
 					</li>
 				</ul>
-            </li>
-            <li>
+            </li> {% endcomment %}
+            {% comment %} <li>
                 <a color-alert href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-red"></i>
                     <span class="menu-item-parent">主題式專區</span>
                 </a>
@@ -76,7 +82,7 @@
 						<a color-alert href="/tableau8"><span class="menu-item-parent">豬肉進出口</span></a>
 					</li>
 				</ul>
-				</li>
+				</li> {% endcomment %}
 
 	    </ul>
     </nav>

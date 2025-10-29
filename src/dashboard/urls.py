@@ -14,12 +14,15 @@ Including another URLconf
     2. Import the include() function: from django.conf.urls import url, include
     3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+
 # from django.conf.urls import url, include
 from django.urls import re_path
+
 # from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
+
 # from django.views.i18n import javascript_catalog
 from django.views.i18n import JavaScriptCatalog
 from .views import (
@@ -33,20 +36,19 @@ from .views import (
     # ChartContents,
     # IntegrationTable,
     BrowserNotSupport,
-    Tableau1,
-    Tableau2,
+    # Tableau1,
+    # Tableau2,  # 已停用
     Tableau3,
     Tableau4,
     Tableau5,
     Tableau6,
     Tableau_base,
-    Tableau7,
-    Tableau8,
+    # Tableau7,  # 已停用
+    # Tableau8,  # 已停用
     # Tableautest,
     # Tableautrusted,
     # WebPublicIP,
     # GetTableauServerTicket,
-
 )
 
 urlpatterns = [
@@ -58,8 +60,7 @@ urlpatterns = [
     # url(r'^dailytrans/', include('apps.dailytrans.urls', namespace='dailytrans')),
     # i18n
     # re_path(r'^jsi18n/$', javascript_catalog, name='parse_javascript'),
-    re_path(r'^jsi18n/$', JavaScriptCatalog.as_view(), name='parse_javascript'),
-
+    re_path(r"^jsi18n/$", JavaScriptCatalog.as_view(), name="parse_javascript"),
     # url(r'^set-user-language/(?P<lang>[-\w]+)/$',
     # Index.as_view(), name='set_user_language'),
     # third part
@@ -67,32 +68,38 @@ urlpatterns = [
     # watchlist
     # url(r'^set-user-watchlist/(?P<wi>\d+)/$',
     # Index.as_view(), name='set_user_watchlist'),
-    re_path(r'^tableau1/$', Tableau1.as_view(), name='Tableau1'),
-    re_path(r'^tableau2/$', Tableau2.as_view(), name='Tableau2'),
-    re_path(r'^tableau3/$', Tableau3.as_view(), name='Tableau3'),
-    re_path(r'^tableau4/$', Tableau4.as_view(), name='Tableau4'),
-    re_path(r'^tableau5/$', Tableau5.as_view(), name='Tableau5'),
-    re_path(r'^tableau6/$', Tableau6.as_view(), name='Tableau6'),
-    re_path(r'^tableau7/$', Tableau7.as_view(), name='Tableau7'),
-    re_path(r'^tableau8/$', Tableau8.as_view(), name='Tableau8'),
+    # re_path(r"^tableau1/$", Tableau1.as_view(), name="Tableau1"),  # 已停用
+    # re_path(r"^tableau2/$", Tableau2.as_view(), name="Tableau2"),  # 已停用
+    re_path(r"^tableau3/$", Tableau3.as_view(), name="Tableau3"),
+    re_path(r"^tableau4/$", Tableau4.as_view(), name="Tableau4"),
+    re_path(r"^tableau5/$", Tableau5.as_view(), name="Tableau5"),
+    re_path(r"^tableau6/$", Tableau6.as_view(), name="Tableau6"),
+    # re_path(r"^tableau7/$", Tableau7.as_view(), name="Tableau7"),  # 已停用
+    # re_path(r"^tableau8/$", Tableau8.as_view(), name="Tableau8"),  # 已停用
 
     # url(r'^tableau_reloadjson/$', Tableau_base.reload_json, name='tableau_reloadjson'),
-    re_path(r'^tableau_reloadjson/(?P<refresh>\d)/$', Tableau_base.reload_json, name='tableau_reloadjson'),
+    re_path(
+        r"^tableau_reloadjson/(?P<refresh>\d)/$",
+        Tableau_base.reload_json,
+        name="tableau_reloadjson",
+    ),
     # url(r'^tableautest/$', Tableautest.as_view(), name='Tableautest'),
     # url(r'^tableautrusted/$', Tableautrusted.as_view(), name='Tableautrusted'),
     # url(r'^webpublicip/$', WebPublicIP.as_view(), name='WebPublicIP'),
     # url(r'^gettableauserverticket/$', GetTableauServerTicket.as_view(), name='GetTableauServerTicket'),
-
 ]
 
 urlpatterns += i18n_patterns(
     # admin
     # url(r'^{}/'.format(settings.DJANGO_ADMIN_PATH), admin.site.urls),
     # pages
-    re_path(r'^$', Index.as_view(), name='index'),
-    re_path(r'^about/', About.as_view(), name='about'),
-    re_path(r'^browser-not-support/', BrowserNotSupport.as_view(),
-        name='browser_not_support'),
+    re_path(r"^$", Index.as_view(), name="index"),
+    re_path(r"^about/", About.as_view(), name="about"),
+    re_path(
+        r"^browser-not-support/",
+        BrowserNotSupport.as_view(),
+        name="browser_not_support",
+    ),
     # jarvis menu ajax
     # url(r'^jarvismenu/(?P<wi>\d+)/(?P<ct>\w+)/(?P<oi>\d+)/$',
     # JarvisMenu.as_view(), name='jarvismenu'),
@@ -127,15 +134,17 @@ urlpatterns += i18n_patterns(
 )
 
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL,
-                          document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(
+        settings.STATIC_URL, document_root=settings.STATIC_ROOT
+    )
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.SERVE_MEDIA_FILES:
     urlpatterns += patterns(
-        '',
-        re_path(r'^%s(?P<path>.*)$' % settings.MEDIA_URL.lstrip('/'),
-            'django.views.static.serve',
-            {'document_root': settings.MEDIA_ROOT}),
+        "",
+        re_path(
+            r"^%s(?P<path>.*)$" % settings.MEDIA_URL.lstrip("/"),
+            "django.views.static.serve",
+            {"document_root": settings.MEDIA_ROOT},
+        ),
     )
