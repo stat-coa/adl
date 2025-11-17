@@ -4,32 +4,16 @@ volumes:
   static-volume:
   letsencrypt:
 
-services:
-  # fds: &fds
-  #   container_name: fds
-  #   image: fds
-  #   # ports:
-  #   #   - 8000:8000
-  #   build: 
-  #     context: .
-  #     dockerfile: Dockerfile_fds
-  #   volumes:
-  #     - ./FDS:/app
-  #     - static-volume:/app/live-static-files
-  #   command: /app/scripts/start.sh
-  #   restart: on-failure
-  #   env_file: ./FDS/.env
-  #   networks:
-  #     - atri
 
-  atsvp: &atsvp
-    container_name: atsvp
-    image: atsvp
-  #   ports:
-  #     - 8001:8000
+services:
+  adl: &adl
+    container_name: adl
+    image: adl
+    ports:
+      - "8000:8000"
     build:
       context: .
-      dockerfile: Dockerfile_apsvp
+      dockerfile: Dockerfile
     volumes:
       - ./src:/app
       - static-volume:/app/live-static-files
@@ -38,57 +22,6 @@ services:
     env_file: .env
     networks:
       - atri
-  
-  # apsvp: &apsvp
-  #   container_name: apsvp
-  #   image: apsvp
-  # #  ports:
-  # #   #   - 8002:8002
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile_apsvp
-  #   volumes:
-  #     - ./src2:/app
-  #     - static-volume:/app/live-static-files
-  #   command: /app/scripts/start.sh
-  #   restart: on-failure
-  #   env_file: .env
-  #   networks:
-  #     - atri
-
-    
-  nginx-certbot:
-    restart: unless-stopped
-    image: jonasal/nginx-certbot:latest
-    ports:
-      - 80:80/tcp
-      - 443:443/tcp
-    environment:
-      CERTBOT_EMAIL: coa.statistics@gmail.com
-    env_file:
-      - ./nginx-certbot.env
-    volumes:
-      - static-volume:/app/live-static-files
-      - ./config/nginx:/etc/nginx/user.conf.d
-      - letsencrypt:/etc/letsencrypt
-      # - ./validation:/.well-known/pki-validation
-      # - ./certification:/etc/ssl/live
-    networks:
-      - atri
-
-        #  nginx:
-    #    image: nginx
-      #    volumes:
-        #- ./config/nginx:/etc/nginx/conf.d
-        #      - ./nginx.conf:/etc/nginx/nginx.conf
-        #      - static-volume:/app/live-static-files
-        #      - ./fds.atri.org.tw:/etc/ssl
-        #      - ./5621A440D89456860EDB3B72E08C59BC.txt:/.well-known/pki-validation
-        #   ports:
-      #     - "80:80"
-        #      - "443:443"
-        #    networks:
-      #      - atri
 
 networks:
   atri:
