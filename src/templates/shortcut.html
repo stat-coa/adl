@@ -6,7 +6,7 @@
     <ul>
         <li>
             <!-- advise .shortcut-name to span -->
-            <a href="#{% url 'about' %}" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-info fa-4x"></i> <span class="shortcut-name">{% trans 'About' %}</span></span></a>
+            <a href="#{% url 'about' %}" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fas fa-info-circle fa-4x"></i> <span class="shortcut-name">{% trans 'About' %}</span></span></a>
         </li>
     </ul>
 </div>
@@ -19,7 +19,7 @@
         {% for watchlist in watchlists %}
             <li>
                 <a href="{% url 'set_user_watchlist' wi=watchlist.id %}" class="jarvismetro-tile big-cubes bg-color-greenLight {% if watchlist == user_watchlist %}selected{% endif %}"> <span class="iconbox">
-                    <i class="fa fa-list-alt fa-4x"></i>
+                    <i class="fas fa-list-alt fa-4x"></i>
                     <span>{{ watchlist.name }}
                         <span class="label pull-right bg-color-greenDark">{{ watchlist.children.count }}</span></span>
                     </span>
