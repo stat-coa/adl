@@ -1,7 +1,0 @@
-User-agent: AhrefsBot
-User-agent: Baiduspider
-User-agent: Ezooms
-User-agent: MJ12bot
-User-agent: YandexBot
-Disallow: /
-Crawl-delay: 30
