@@ -1,0 +1,21 @@
+version: '3'
+
+volumes:
+  static-volume-dev:
+
+services:
+  adl:
+    container_name: adl-dev
+    image: adl
+    ports:
+      - "8000:80"  # 本機可以直接訪問 http://localhost:8000
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/app
+      - static-volume-dev:/app/live-static-files
+    command: /app/scripts/start.sh
+    restart: unless-stopped
+    env_file: .env
+

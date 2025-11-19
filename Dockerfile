@@ -38,6 +38,9 @@ ENV DISPLAY=:99
 # upgrade pip
 RUN pip install --upgrade pip
 
+# install setuptools for distutils compatibility with Python 3.12
+RUN pip install setuptools
+
 # install selenium
 # RUN pip install selenium
 

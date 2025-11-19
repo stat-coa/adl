@@ -9,8 +9,9 @@ services:
   adl: &adl
     container_name: adl
     image: adl
-    ports:
-      - "8000:8000"
+    expose:
+      - 80
+      - 443
     build:
       context: .
       dockerfile: Dockerfile
@@ -21,9 +22,8 @@ services:
     restart: on-failure
     env_file: .env
     networks:
-      - atri
+      - gateway
 
 networks:
-  atri:
-    #    external: true
-    driver: bridge
+  gateway:
+    external: true
