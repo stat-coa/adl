@@ -499,8 +499,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # USE_X_FORWARDED_PORT = True
 
 # TableauServer Update Date
-TABLEAU_UPDATE_YEAR = env.str("ATSVP_UPDATE_YEAR", default="")
-TABLEAU_UPDATE_MONTH = env.str("ATSVP_UPDATE_MONTH", default="")
+TABLEAU_UPDATE_YEAR = env.str("ADL_UPDATE_YEAR", default="")
+TABLEAU_UPDATE_MONTH = env.str("ADL_UPDATE_MONTH", default="")
 
 # Web Name
-WEB_NAME = env.str("ATSVP_WEBNAME", default="農業災害損失統計平台")
+WEB_NAME = env.str("ADL_WEBNAME", default="農業災害損失統計平台")
